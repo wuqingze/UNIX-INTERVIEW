@@ -105,3 +105,81 @@ The arguments are available as ${n}, where n is the position of the argument.
 For example, $0 would give the name of the script, $1 would give the first additional argument, $2 the second, and so on. The total number of additional arguments is found in ${#}.
 
 A loop that starts at ${#} and ends at 1 can be used to print each additional argument in reverse order.
+
+#### 31) What would be a simple way to continuously monitor the log file for a service that is running?
+
+```
+tail -F $LOGFILE 
+```
+w to print tomorrow’s date in Unix?
+
+$LOGFILE is an environment variable corresponding to the path to the log file to be monitored.
+
+By default, the Linux tail command prints the last 10 lines of a file to standard output. The -F option causes additional file content to be displayed in real time as the file continues to grow. This yields a simple mechanism for monitoring services via their log files in close to real time.
+
+Two other specific command line options of interest in this context are:
+
+The -s option causes tail to sleep for a specified number of seconds between updates (e.g., ‘tail -F -s 10’ will update the displayed file contents roughly every 10 seconds rather than in close to real time as the file is updated).
+
+The -n option can be used to specify a number of lines other than 10 to initially display (e.g., ‘tail -n 20 -F’ will first display the last 20 lines of the file and will then continue updating the output in realtime).
+
+#### 32) How do you insert a new line or text after every n lines in Unix?
+```
+awk '{
+    if(NR%n==0){
+        print $0;
+        print newline;
+    }else{
+        print $0;
+    }
+}' file
+```
+
+#### 33) How to remove the Control-M character from a file in Unix?
+```
+sed -i 's/^M//g' file
+```
+
+#### 34) How to print tomorrow’s date in Unix?
+```
+date -d '1 day'
+```
+
+#### 35) How will you find which operating system your system is running on in Unix?
+```
+uname -a
+```
+
+#### 36) How will you run a process in background? How will you bring that into foreground and how will you kill that process?
+```
+... >/dev/null 2>&1 &
+```
+- 0表示标准输入
+- 1表示标准输出
+- 2表示标准错误
+
+#### 37) How do you copy file from one host to other?
+```
+scp src target
+scp local_file remote_username@remote_ip:remote_folder 
+```
+
+#### 38) How do you check how much space left in current drive?
+```
+df -h
+```
+![](imgs/df-command-in-unix-to-find-free-space-unix-interview-question.jpg)
+
+#### 39) Write a command to display the first 5 characters from each line of a file?
+```
+cat file | cut -c 1-5
+```
+
+#### 40) What is the significance of `$?` ?
+`$?` gives the exit status of the last command that was executed.
+- 0 (Zero) – means command returns successful.
+- Non Zero – means command returns unsuccessful.
+
+![](imgs/return-code-echo-unix-interview-questions.jpg)
+
+在写脚本是可以用来判断上一条命令的执行情况。
