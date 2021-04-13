@@ -183,3 +183,61 @@ cat file | cut -c 1-5
 ![](imgs/return-code-echo-unix-interview-questions.jpg)
 
 在写脚本是可以用来判断上一条命令的执行情况。
+
+#### 41) I have a file like below which contains special characters in the 2nd column and I want to clean the file by having only alphanumeric values in the file. How can I do that?
+```
+Michael,10#$
+Bob,20^&amp;amp;amp;
+Smith,30@!
+Will,20()
+Joe,$30+_
+```
+![](imgs/clean-the-file-by-having-only-alphanumeric-values.jpg)
+
+```
+sed -E 's/[^a-zA-Z0-9,]//g' file
+```
+
+#### 42) I want to create a directory when that directory does not exist and if directory exists it should not return any error?
+```
+if [! -e directory ]; then
+    mkdir directory
+fi
+```
+
+#### 43) How to count the number of columns in each row in a text file?
+```
+awk -F',' '{print NF;}' file
+```
+
+#### 45) I have one file with 4 records, 2 columns and 1 trailer record like below:
+```
+Green,10
+Red, 30
+Blue,60
+100
+```
+I want to calculate sum of the second column values and need to check whether that total sum is equal to trailer record value i.e.100?
+
+Below shell script can used to calculate sum of the values in the columns and compare the sum with the total value in trailer record.
+
+```
+awk -F',' 'BEGIN{ SUM=0;TOTAL=0;}
+{
+    if($2 == ""){
+        TOTAL = $1;
+    }else{
+        SUM += $2;
+    }
+}
+END{
+    print "TOTAL " TOTAL;
+    print "SUM " SUM;
+    if(SUM == TOTAL){
+        print "matched!";
+    }else{
+        print "no matched!";
+    }
+}' $1
+```
+
