@@ -1,6 +1,6 @@
 ### UNIX INTERVIEW QUESTIONS AND ANSWERS – 1 
 
-#### 1. How can you write the contents of multiple files in current directory to a single file?
+#### 1) How can you write the contents of multiple files in current directory to a single file?
 ```
 tmp=$(date "+%Y-%m-%d-%H:%M:%S")
 cnt=1
@@ -13,12 +13,12 @@ done
 mv tmp "file"$cnt
 ```
 
-#### 2. How can I reverse a word like ‘Unix’ to ‘xinU’ ?
+#### 2) How can I reverse a word like ‘Unix’ to ‘xinU’ ?
 ```
 echo Unix | rev
 ```
 
-#### 3. How to display the fields in a text file in reverse order?
+#### 3) How to display the fields in a text file in reverse order?
 
 **Sulution-1**
 ```
@@ -47,22 +47,22 @@ awk ' BEGIN {ORS=""}
 }' filename
 ```
 
-#### 4.Write a command to find the sum of bytes (size of file) of all files in a directory.
+#### 4)Write a command to find the sum of bytes (size of file) of all files in a directory.
 ```
 ls -l | grep -v / | awk 'BEGIN{sum=0;}{sum+=$5;}END{print sum;}'
 ```
 
-#### 5.Write a command to print the lines which end with the word “unix”?
+#### 5) Write a command to print the lines which end with the word “unix”?
 ```
 grep -P "unix$" file
 ```
 
-#### 7.How to remove the first 2 lines from a file?
+#### 7) How to remove the first 2 lines from a file?
 ```
 sed -i '1,2 d' file
 ```
 
-#### 11.Write a command to list the files in ‘/usr’ directory that start with ‘bo’ and then display the number of lines in each file?
+#### 11) Write a command to list the files in ‘/usr’ directory that start with ‘bo’ and then display the number of lines in each file?
 ```
 for f in `ls /usr`;
 do
@@ -81,7 +81,7 @@ or
 find /usr -name 'bo*' -type -f -exec wc -l {} \
 ```
 
-#### 12.How to remove blank lines in a file?
+#### 12) How to remove blank lines in a file?
 ```
 sed -i '/^$/d' file
 ```
@@ -116,27 +116,27 @@ or
 sed -i 's/unix/linux/2' file
 ```
 
-#### 16.How to remove all the occurrences of the word “unix” except the first one in a line with in the entire file?
+#### 16) How to remove all the occurrences of the word “unix” except the first one in a line with in the entire file?
 ```
 sed 's/unix//2g' filename
 ```
 
-#### 17.How to replace the word “unix” with “linux” from 3rd line to last line in a file?
+#### 17) How to replace the word “unix” with “linux” from 3rd line to last line in a file?
 ```
 sed -i '3,$ s/unix/linux/g' file
 ```
 
-#### 18.How to list the files that are accessed 3 days ago in the current directory?
+#### 18) How to list the files that are accessed 3 days ago in the current directory?
 ```
 find -atime 3 -type f
 ```    
 
-#### 19.How to list the files that were modified 3 days ago in the current directory?
+#### 19) How to list the files that were modified 3 days ago in the current directory?
 ```
 find -mtime 3 -type f
 ```
 
-#### 20.How to list the files whose status is changed 3 days ago in the current directory?
+#### 20) How to list the files whose status is changed 3 days ago in the current directory?
 ```
 find -ctime 3 -type f
 ```
@@ -148,7 +148,7 @@ find -ctime 3 -type f
 sort emp_data.txt | uniq -d
 ```
 
-#### 26. I have a one file which contains employee name and department number in it. Can you display the employee count by GROUP BY department number?
+#### 26) I have a one file which contains employee name and department number in it. Can you display the employee count by GROUP BY department number?
 ![](./imgs/uniq-command-in-unix-group-by-count.jpg)
 ```
 cut -d ',' -f2 emp_data.txt | sort | uniq -c
@@ -320,4 +320,3 @@ END{
     }
 }' $1
 ```
-
