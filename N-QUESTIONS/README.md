@@ -61,6 +61,86 @@ grep -P "unix$" file
 ```
 sed -i '1,2 d' file
 ```
+
+#### 11.Write a command to list the files in ‘/usr’ directory that start with ‘bo’ and then display the number of lines in each file?
+```
+for f in `ls /usr`;
+do
+    if [[ -f $f ]] && [[ "$f" =~ ^bo.*$ ]]; 
+    then
+        wc -l $f
+    fi
+done
+```
+or
+```
+wc -l /usr/bo*
+```
+or
+```
+find /usr -name 'bo*' -type -f -exec wc -l {} \
+```
+
+#### 12.How to remove blank lines in a file?
+```
+sed -i '/^$/d' file
+```
+
+#### 13) Write command to remove the prefix of the string ending with ‘/’?
+for example:
+
+![](imgs/basename-command-to-remove-slashes.jpg)
+```
+str="/hello/"
+echo $str | awk -F'/' '{ if("" == $NF){  print $(NF-1);} else { print $NF;}}'
+```
+
+#### 14) How to display zero byte size files?
+```
+ls -lrt | awk '{if($5==0) print $NF;}'
+```
+or
+```
+find $dir -size 0
+```
+
+#### 15) How to replace the second occurrence of the word “unix” with “linux” in a file?
+```
+1. vim file
+2. /unix
+3. find second unix
+4. replace unix with linux
+```
+or
+```
+sed -i 's/unix/linux/2' file
+```
+
+#### 16.How to remove all the occurrences of the word “unix” except the first one in a line with in the entire file?
+```
+sed 's/unix//2g' filename
+```
+
+#### 17.How to replace the word “unix” with “linux” from 3rd line to last line in a file?
+```
+sed -i '3,$ s/unix/linux/g' file
+```
+
+#### 18.How to list the files that are accessed 3 days ago in the current directory?
+```
+find -atime 3 -type f
+```    
+
+#### 19.How to list the files that were modified 3 days ago in the current directory?
+```
+find -mtime 3 -type f
+```
+
+#### 20.How to list the files whose status is changed 3 days ago in the current directory?
+```
+find -ctime 3 -type f
+```
+
 #### 25) How can you display the duplicates in a file?
 
 ‘uniq -d’ command is useful to display duplicates from a file.
